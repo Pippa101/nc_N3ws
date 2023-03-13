@@ -36,3 +36,53 @@
     transform: rotate(360deg);
   }
 }
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+#orange3 {
+  color: orangered;
+}
+.headerDecoration {
+  width: 100px;
+  height: 20px;
+  background-color: black;
+}
+
+.popular-articles img {
+  width: 300px;
+}
+
+#user-account-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-card {
+  border: solid #282c34;
+  border-radius: 20px;
+  width: 250px;
+  height: 350px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.avatar {
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  border: solid;
+  border-radius: 50%;
+}
