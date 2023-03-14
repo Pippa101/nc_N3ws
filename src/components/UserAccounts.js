@@ -1,19 +1,12 @@
-import { useEffect } from "react";
 import { useState } from "react";
+import { FetchUsers } from "./api-logic";
 
 const UserAccounts = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    setIsLoading(true);
-    fetch("https://n3ws.onrender.com/api/users")
-      .then((response) => response.json())
-      .then((body) => {
-        setUsers(body);
-        setIsLoading(false);
-      });
-  }, []);
+
+  FetchUsers(setIsLoading, setUsers);
 
   return isLoading ? (
     <p>loading ...</p>

@@ -6,7 +6,6 @@ const TopicSearch = () => {
 
   const handleTopicChange = (e) => {
     setTopic(e.target.value);
-    console.log(e.target.value);
   };
 
   return (

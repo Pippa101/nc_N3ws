@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TopicSearch from "./TopicSearch";
+import { FetchMostPopularArticles } from "./api-logic";
 
 const HomePage = () => {
   const [mostPopular, setMostPopular] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetch("https://n3ws.onrender.com/api/articles?sort_by=votes")
-      .then((response) => response.json())
-      .then((body) => {
-        setMostPopular(body.slice(0, 4));
-        setIsLoading(false);
-      });
-  }, []);
+  FetchMostPopularArticles(setIsLoading, setMostPopular);
 
   return isLoading ? (
     <p>Loading ...</p>

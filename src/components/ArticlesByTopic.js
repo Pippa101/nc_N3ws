@@ -1,16 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { FetchAllArticlesByTopic } from "./api-logic";
 
 const ArticlesByTopic = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    fetch("https://n3ws.onrender.com/api/articles?sort_by=votes")
-      .then((response) => response.json())
-      .then((body) => {
-        setArticles(body);
-        setIsLoading(false);
-      });
-  }, []);
+
+  FetchAllArticlesByTopic(setIsLoading, setArticles);
 
   return isLoading ? (
     <p>Loading ...</p>
