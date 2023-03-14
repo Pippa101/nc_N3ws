@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TopicSearch from "./TopicSearch";
 import { FetchMostPopularArticles } from "./api-logic";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [mostPopular, setMostPopular] = useState([]);
@@ -24,13 +25,19 @@ const HomePage = () => {
       <section id="home-article-section">
         {mostPopular.map((popularArticle) => {
           return (
-            <article className="articles" key={popularArticle.article_id}>
-              <img
-                src={popularArticle.article_img_url}
-                alt={`scene of ${popularArticle.topic}`}
-              />
-              <h4>{popularArticle.title}</h4>
-            </article>
+            <Link
+              to={`/articles/${popularArticle.article_id}`}
+              key={popularArticle.title}
+              className="links"
+            >
+              <article className="articles" key={popularArticle.article_id}>
+                <img
+                  src={popularArticle.article_img_url}
+                  alt={`scene of ${popularArticle.topic}`}
+                />
+                <h4>{popularArticle.title}</h4>
+              </article>
+            </Link>
           );
         })}
       </section>

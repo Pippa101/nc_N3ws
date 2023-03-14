@@ -23,3 +23,9 @@ export const FetchSingleArticle = (article_id) => {
     (response) => response.json()
   );
 };
+
+export const FetchArticleComments = (article_id) => {
+  return fetch(
+    `https://n3ws.onrender.com/api/articles/${article_id}/comments`
+  ).then((response) => response.json());
+};

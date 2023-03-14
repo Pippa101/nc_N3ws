@@ -105,6 +105,22 @@ h1 {
   width: 100%;
 }
 
+.comment-section {
+  border: solid;
+  border-radius: 20px;
+}
+
+.comment-article {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: left;
+  border: solid;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
 #user-account-container {
   display: flex;
   flex-direction: row;
