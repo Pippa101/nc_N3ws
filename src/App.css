@@ -47,11 +47,11 @@ header {
 h1 {
   margin-left: 5vw;
   margin-right: 5vw;
-  color: black;
 }
 
-#h1-link {
+.links {
   text-decoration: none;
+  color: black;
 }
 
 #orange3 {
@@ -90,6 +90,19 @@ h1 {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+}
+
+#SingleArticle-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+#SingleArticle-main img {
+  width: 100%;
 }
 
 #user-account-container {

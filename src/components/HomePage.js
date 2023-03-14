@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TopicSearch from "./TopicSearch";
 import { FetchMostPopularArticles } from "./api-logic";
 
@@ -6,7 +6,13 @@ const HomePage = () => {
   const [mostPopular, setMostPopular] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  FetchMostPopularArticles(setIsLoading, setMostPopular);
+  useEffect(() => {
+    setIsLoading(true);
+    FetchMostPopularArticles().then((body) => {
+      setMostPopular(body.slice(0, 4));
+      setIsLoading(false);
+    });
+  }, []);
 
   return isLoading ? (
     <p>Loading ...</p>
