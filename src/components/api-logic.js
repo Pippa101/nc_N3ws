@@ -1,35 +1,25 @@
-import { useEffect } from "react";
-
-export const FetchMostPopularArticles = (setIsLoading, setMostPopular) => {
-  return useEffect(() => {
-    fetch("https://n3ws.onrender.com/api/articles?sort_by=votes")
-      .then((response) => response.json())
-      .then((body) => {
-        setMostPopular(body.slice(0, 4));
-        setIsLoading(false);
-      });
-  }, [setIsLoading, setMostPopular]);
+export const FetchMostPopularArticles = () => {
+  return fetch("https://n3ws.onrender.com/api/articles?sort_by=votes").then(
+    (response) => {
+      return response.json();
+    }
+  );
 };
 
-export const FetchAllArticlesByTopic = (setIsLoading, setArticles) => {
-  return useEffect(() => {
-    fetch("https://n3ws.onrender.com/api/articles?sort_by=votes")
-      .then((response) => response.json())
-      .then((body) => {
-        setArticles(body);
-        setIsLoading(false);
-      });
-  }, [setIsLoading, setArticles]);
+export const FetchAllArticlesByTopic = () => {
+  return fetch("https://n3ws.onrender.com/api/articles?sort_by=votes").then(
+    (response) => response.json()
+  );
 };
 
-export const FetchUsers = (setIsLoading, setUsers) => {
-  return useEffect(() => {
-    setIsLoading(true);
-    fetch("https://n3ws.onrender.com/api/users")
-      .then((response) => response.json())
-      .then((body) => {
-        setUsers(body);
-        setIsLoading(false);
-      });
-  }, [setIsLoading, setUsers]);
+export const FetchUsers = () => {
+  return fetch("https://n3ws.onrender.com/api/users").then((response) =>
+    response.json()
+  );
+};
+
+export const FetchSingleArticle = (article_id) => {
+  return fetch(`https://n3ws.onrender.com/api/articles/${article_id}`).then(
+    (response) => response.json()
+  );
 };

@@ -18,7 +18,7 @@ const TopicSearch = () => {
         <option value="football">Football</option>
         <option value="cooking">Cooking</option> */}
       </select>
-      <Link to="/articles">
+      <Link to="/articles" className="links">
         <button type="submit">Go</button>
       </Link>
     </form>
