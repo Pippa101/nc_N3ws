@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FetchAllArticlesByTopic } from "./api-logic";
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,9 @@ const ArticlesByTopic = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  FetchAllArticlesByTopic(setIsLoading, setArticles);
+  useEffect(() => {
+    FetchAllArticlesByTopic(setIsLoading, setArticles);
+  }, [setIsLoading, setArticles]);
 
   return isLoading ? (
     <p>Loading ...</p>

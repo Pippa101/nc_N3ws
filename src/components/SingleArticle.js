@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FetchSingleArticle } from "./api-logic";
 
 const SingleArticle = () => {
@@ -7,7 +7,9 @@ const SingleArticle = () => {
   const [SingleArticle, setSingleArticle] = useState({});
   const { article_id } = useParams();
 
-  FetchSingleArticle(setIsLoading, article_id, setSingleArticle);
+  useEffect(() => {
+    FetchSingleArticle(setIsLoading, article_id, setSingleArticle);
+  }, [setIsLoading, article_id, setSingleArticle]);
 
   return isLoading ? (
     <p>Loading ...</p>
