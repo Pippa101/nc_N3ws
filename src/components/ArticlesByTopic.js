@@ -7,6 +7,7 @@ const ArticlesByTopic = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     FetchAllArticlesByTopic().then((body) => {
       setArticles(body);
       setIsLoading(false);

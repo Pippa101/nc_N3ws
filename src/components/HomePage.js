@@ -7,6 +7,7 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     FetchMostPopularArticles().then((body) => {
       setMostPopular(body.slice(0, 4));
       setIsLoading(false);
