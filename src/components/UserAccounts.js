@@ -7,8 +7,12 @@ const UserAccounts = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    FetchUsers(setIsLoading, setUsers);
-  }, [setIsLoading, setUsers]);
+    setIsLoading(true);
+    FetchUsers().then((body) => {
+      setUsers(body);
+      setIsLoading(false);
+    });
+  }, []);
 
   return isLoading ? (
     <p>loading ...</p>

@@ -8,8 +8,12 @@ const SingleArticle = () => {
   const { article_id } = useParams();
 
   useEffect(() => {
-    FetchSingleArticle(setIsLoading, article_id, setSingleArticle);
-  }, [setIsLoading, article_id, setSingleArticle]);
+    setIsLoading(true);
+    FetchSingleArticle(article_id).then((body) => {
+      setSingleArticle(body);
+      setIsLoading(false);
+    });
+  }, [article_id]);
 
   return isLoading ? (
     <p>Loading ...</p>

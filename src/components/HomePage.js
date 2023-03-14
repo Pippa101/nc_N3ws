@@ -6,10 +6,12 @@ const HomePage = () => {
   const [mostPopular, setMostPopular] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(
-    () => FetchMostPopularArticles(setIsLoading, setMostPopular),
-    [setIsLoading, setMostPopular]
-  );
+  useEffect(() => {
+    FetchMostPopularArticles().then((body) => {
+      setMostPopular(body.slice(0, 4));
+      setIsLoading(false);
+    });
+  }, []);
 
   return isLoading ? (
     <p>Loading ...</p>

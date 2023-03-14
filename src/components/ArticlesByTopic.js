@@ -7,8 +7,11 @@ const ArticlesByTopic = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    FetchAllArticlesByTopic(setIsLoading, setArticles);
-  }, [setIsLoading, setArticles]);
+    FetchAllArticlesByTopic().then((body) => {
+      setArticles(body);
+      setIsLoading(false);
+    });
+  }, []);
 
   return isLoading ? (
     <p>Loading ...</p>
@@ -18,7 +21,11 @@ const ArticlesByTopic = () => {
       <section id="ArticlesByTopic-article-section">
         {articles.map((article) => {
           return (
-            <Link to={`/articles/${article.article_id}`} className="links">
+            <Link
+              to={`/articles/${article.article_id}`}
+              key={article.title}
+              className="links"
+            >
               <article className="articles" key={article.article_id}>
                 <img
                   src={article.article_img_url}
