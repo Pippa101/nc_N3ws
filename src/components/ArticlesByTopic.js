@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FetchAllArticlesByTopic } from "./api-logic";
+import { Link } from "react-router-dom";
 
 const ArticlesByTopic = () => {
   const [articles, setArticles] = useState([]);
@@ -15,13 +16,15 @@ const ArticlesByTopic = () => {
       <section id="ArticlesByTopic-article-section">
         {articles.map((article) => {
           return (
-            <article className="articles" key={article.article_id}>
-              <img
-                src={article.article_img_url}
-                alt={`scene of ${article.topic}`}
-              />
-              <h4>{article.title}</h4>
-            </article>
+            <Link to={`/articles/${article.article_id}`} className="links">
+              <article className="articles" key={article.article_id}>
+                <img
+                  src={article.article_img_url}
+                  alt={`scene of ${article.topic}`}
+                />
+                <h4>{article.title}</h4>
+              </article>
+            </Link>
           );
         })}
       </section>

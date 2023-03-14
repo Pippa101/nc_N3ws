@@ -33,3 +33,19 @@ export const FetchUsers = (setIsLoading, setUsers) => {
       });
   }, [setIsLoading, setUsers]);
 };
+
+export const FetchSingleArticle = (
+  setIsLoading,
+  article_id,
+  setSingleArticle
+) => {
+  return useEffect(() => {
+    setIsLoading(true);
+    fetch(`https://n3ws.onrender.com/api/articles/${article_id}`)
+      .then((response) => response.json())
+      .then((body) => {
+        setSingleArticle(body);
+        setIsLoading(false);
+      });
+  }, [setIsLoading, article_id, setSingleArticle]);
+};
