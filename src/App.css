@@ -47,19 +47,49 @@ header {
 h1 {
   margin-left: 5vw;
   margin-right: 5vw;
+  color: black;
+}
+
+#h1-link {
+  text-decoration: none;
 }
 
 #orange3 {
   color: orangered;
 }
+
 .headerDecoration {
   width: 100px;
   height: 20px;
   background-color: black;
 }
 
-.popular-articles img {
+.articles {
+  border: solid;
+  border-radius: 20px;
   width: 300px;
+  margin: 10px;
+}
+
+.articles img {
+  width: 300px;
+  border-radius: 15px;
+}
+
+#home-article-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#ArticlesByTopic-article-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 #user-account-container {
