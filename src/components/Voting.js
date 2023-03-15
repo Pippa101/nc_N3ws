@@ -1,29 +1,45 @@
 import { useEffect, useState } from "react";
 import { PatchArticleVotes } from "./api-logic";
 
-const Voting = ({ SingleArticle, article_id }) => {
+const Voting = ({ singleArticle, article_id }) => {
   const [vote, setVote] = useState(0);
-  const [appendedVote, setAppendedVote] = useState(SingleArticle.votes);
+  const [disabledButton, setDisabledButton] = useState(false);
+
   useEffect(() => {
     PatchArticleVotes(article_id, vote)
       .then((response) => response.json())
-      .then((response) => setAppendedVote(response.votes));
+      .catch((error) => {
+        return alert(
+          "Sorry your vote didn't go through, please try again",
+          `Error: ${error}`
+        );
+      });
   }, [article_id, vote]);
 
   const incrementVote = (e) => {
     setVote(1);
+    setDisabledButton(true);
   };
   const decrementVote = (e) => {
     setVote(-1);
+    setDisabledButton(true);
   };
 
   return (
     <section id="vote-section">
-      <h4>Votes: {appendedVote}</h4>
-      <button className="vote-button" onClick={incrementVote}>
+      <h4>Votes: {singleArticle.votes + vote}</h4>
+      <button
+        disabled={disabledButton}
+        className="vote-button"
+        onClick={incrementVote}
+      >
         Vote Up!
       </button>
-      <button className="vote-button" onClick={decrementVote}>
+      <button
+        disabled={disabledButton}
+        className="vote-button"
+        onClick={decrementVote}
+      >
         Vote Down!
       </button>
     </section>
