@@ -37,3 +37,14 @@ export const PatchArticleVotes = (article_id, vote) => {
     body: JSON.stringify({ inc_votes: vote }),
   });
 };
+
+export const PostComment = (article_id, commentToPost) => {
+  return fetch(
+    `https://n3ws.onrender.com/api/articles/${article_id}/comments`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ body: commentToPost }),
+    }
+  );
+};
