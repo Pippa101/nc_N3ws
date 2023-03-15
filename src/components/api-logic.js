@@ -29,3 +29,11 @@ export const FetchArticleComments = (article_id) => {
     `https://n3ws.onrender.com/api/articles/${article_id}/comments`
   ).then((response) => response.json());
 };
+
+export const PatchArticleVotes = (article_id, vote) => {
+  return fetch(`https://n3ws.onrender.com/api/articles/${article_id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ inc_votes: vote }),
+  });
+};

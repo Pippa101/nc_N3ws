@@ -145,3 +145,11 @@ h1 {
   border: solid;
   border-radius: 50%;
 }
+
+.vote-button {
+  margin: 10px;
+}
+
+.vote-button:active {
+  background-color: rgb(222, 116, 77);
+}

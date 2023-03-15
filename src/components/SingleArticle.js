@@ -2,10 +2,11 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FetchSingleArticle } from "./api-logic";
 import Comments from "./Comments";
+import Voting from "./Voting";
 
 const SingleArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [SingleArticle, setSingleArticle] = useState({});
+  const [singleArticle, setSingleArticle] = useState({});
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -21,12 +22,13 @@ const SingleArticle = () => {
   ) : (
     <main id="SingleArticle-main">
       <img
-        src={SingleArticle.article_img_url}
-        alt={`scene of {SingleArticle.topic}`}
+        src={singleArticle.article_img_url}
+        alt={`scene of ${singleArticle.topic}`}
       />
-      <h2>{SingleArticle.title}</h2>
-      <h3>Author: {SingleArticle.author}</h3>
-      <p>{SingleArticle.body}</p>
+      <h2>{singleArticle.title}</h2>
+      <h3>Author: {singleArticle.author}</h3>
+      <p>{singleArticle.body}</p>
+      <Voting singleArticle={singleArticle} article_id={article_id} />
       <Comments article_id={article_id} />
     </main>
   );
