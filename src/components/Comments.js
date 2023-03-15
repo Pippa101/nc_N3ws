@@ -6,7 +6,7 @@ const Comments = ({ article_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [articleComments, setArticleComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
-  const [commentToPost, setCommentToPost] = useState("");
+
   useEffect(() => {
     setIsLoading(true);
     FetchArticleComments(article_id).then((body) => {
@@ -15,23 +15,19 @@ const Comments = ({ article_id }) => {
     });
   }, [article_id]);
 
-  useEffect(() => {
-    PostComment(article_id, commentToPost)
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
-  }, [article_id, commentToPost]);
-
   const handleCommentInput = (e) => {
     setCommentInput(e.target.value);
   };
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    setCommentToPost(commentInput);
+    PostComment(article_id, commentInput)
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
   return isLoading ? (
