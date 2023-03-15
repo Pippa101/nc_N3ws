@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FetchSingleArticle } from "./api-logic";
 import Comments from "./Comments";
+import Voting from "./Voting";
 
 const SingleArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +28,7 @@ const SingleArticle = () => {
       <h2>{SingleArticle.title}</h2>
       <h3>Author: {SingleArticle.author}</h3>
       <p>{SingleArticle.body}</p>
+      <Voting SingleArticle={SingleArticle} article_id={article_id} />
       <Comments article_id={article_id} />
     </main>
   );
