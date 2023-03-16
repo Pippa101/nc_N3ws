@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { FetchAllArticlesByTopic } from "./api-logic";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const ArticlesByTopic = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const topicQuery = searchParams.get("topic");
+  console.log(topicQuery);
 
   useEffect(() => {
     setIsLoading(true);
-    FetchAllArticlesByTopic().then((body) => {
+    FetchAllArticlesByTopic(topicQuery).then((body) => {
       setArticles(body);
       setIsLoading(false);
     });
-  }, []);
+  }, [topicQuery]);
 
   return isLoading ? (
     <p>Loading ...</p>
@@ -34,6 +37,7 @@ const ArticlesByTopic = () => {
         </select>
       </form>
 
+      <h2 id="topic-h2">{topicQuery}</h2>
       <section id="ArticlesByTopic-article-section">
         {articles.map((article) => {
           return (
