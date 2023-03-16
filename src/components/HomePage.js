@@ -3,7 +3,7 @@ import TopicSearch from "./TopicSearch";
 import { FetchMostPopularArticles } from "./api-logic";
 import { Link } from "react-router-dom";
 
-const HomePage = () => {
+const HomePage = ({ topic, setTopic }) => {
   const [mostPopular, setMostPopular] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -20,7 +20,7 @@ const HomePage = () => {
   ) : (
     <main>
       <h2>Fancy A Read?</h2>
-      <TopicSearch />
+      <TopicSearch topic={topic} setTopic={setTopic} />
       <h3>Most Popular</h3>
       <section id="home-article-section">
         {mostPopular.map((popularArticle) => {

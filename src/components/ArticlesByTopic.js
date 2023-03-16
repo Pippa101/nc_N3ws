@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { FetchAllArticlesByTopic } from "./api-logic";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
-const ArticlesByTopic = () => {
+const ArticlesByTopic = ({ topic }) => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const topicQuery = searchParams.get("topic");
+  console.log(topicQuery);
 
   useEffect(() => {
     setIsLoading(true);
-    FetchAllArticlesByTopic().then((body) => {
+    FetchAllArticlesByTopic(topic).then((body) => {
       setArticles(body);
       setIsLoading(false);
     });
-  }, []);
+  }, [topic]);
 
   return isLoading ? (
     <p>Loading ...</p>
