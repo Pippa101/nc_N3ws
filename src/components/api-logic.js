@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const FetchMostPopularArticles = () => {
   return fetch("https://n3ws.onrender.com/api/articles?sort_by=votes").then(
     (response) => {
@@ -6,12 +8,22 @@ export const FetchMostPopularArticles = () => {
   );
 };
 
-export const FetchAllArticlesByTopic = (topicQuery) => {
-  return fetch(
-    topicQuery
-      ? `https://n3ws.onrender.com/api/articles?topic=${topicQuery}`
-      : `https://n3ws.onrender.com/api/articles`
-  ).then((response) => response.json());
+export const FetchAllArticlesByTopic = (
+  topicQuery,
+  sortByQuery,
+  orderQuery
+) => {
+  return axios
+    .get("https://n3ws.onrender.com/api/articles", {
+      params: {
+        topic: topicQuery,
+        sort_by: sortByQuery,
+        order_by: orderQuery,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
 };
 
 export const FetchUsers = () => {

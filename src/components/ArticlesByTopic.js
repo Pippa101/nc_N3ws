@@ -7,15 +7,30 @@ const ArticlesByTopic = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const topicQuery = searchParams.get("topic");
-  console.log(topicQuery);
+  const sortByQuery = searchParams.get("sort_by");
+  const orderQuery = searchParams.get("order_by");
 
   useEffect(() => {
     setIsLoading(true);
-    FetchAllArticlesByTopic(topicQuery).then((body) => {
-      setArticles(body);
-      setIsLoading(false);
-    });
-  }, [topicQuery]);
+    FetchAllArticlesByTopic(topicQuery, sortByQuery, orderQuery).then(
+      (body) => {
+        setArticles(body);
+        setIsLoading(false);
+      }
+    );
+  }, [topicQuery, sortByQuery, orderQuery]);
+
+  const handleSortChange = (e) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("sort_by", e.target.value);
+    setSearchParams(newParams);
+  };
+
+  const handleOrderChange = (e) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("order_by", e.target.value);
+    setSearchParams(newParams);
+  };
 
   return isLoading ? (
     <p>Loading ...</p>
@@ -24,20 +39,25 @@ const ArticlesByTopic = () => {
       <h2>All Articles</h2>
 
       <form>
-        <label htmlFor="sorting-select"> Sort By </label>
-        <select id="sorting-select">
-          <option value="date">Date</option>
+        <select id="sorting-select" onChange={handleSortChange}>
+          <option>Sort By</option>
+          <option value="created_at">Date</option>
           <option value="comment_count">Comment Count</option>
           <option value="votes">Votes</option>
         </select>
 
-        <select>
+        <select onChange={handleOrderChange}>
+          <option>Order</option>
           <option value="DESC">Descending</option>
           <option value="ASC">Ascending</option>
         </select>
       </form>
 
       <h2 id="topic-h2">{topicQuery}</h2>
+      <h3>
+        {sortByQuery ? `Sorted by ${sortByQuery} ` : ""}
+        {orderQuery ? orderQuery : ""}
+      </h3>
       <section id="ArticlesByTopic-article-section">
         {articles.map((article) => {
           return (
