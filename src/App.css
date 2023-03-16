@@ -112,13 +112,40 @@ h1 {
 
 .comment-article {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   text-align: left;
   border: solid;
   margin: 20px;
   padding: 10px;
   border-radius: 20px;
+}
+
+#comment-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+#comment-form input {
+  width: 250px;
+  height: 30px;
+  border-radius: 20px;
+}
+#submit-comment-button {
+  height: 30px;
+  width: 70px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+#submit-comment-button:active {
+  background-color: rgb(222, 116, 77);
 }
 
 #user-account-container {
@@ -152,4 +179,8 @@ h1 {
 
 .vote-button:active {
   background-color: rgb(222, 116, 77);
+}
+
+#error-p {
+  margin: 10px;
 }
