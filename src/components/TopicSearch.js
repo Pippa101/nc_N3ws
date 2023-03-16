@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 const TopicSearch = ({ topic, setTopic }) => {
   const handleTopicChange = (e) => {
     setTopic(`?topic=${e.target.value}`);
-    console.log(topic);
   };
 
   return (
@@ -15,7 +14,7 @@ const TopicSearch = ({ topic, setTopic }) => {
         <option value="football">Football</option>
         <option value="cooking">Cooking</option>
       </select>
-      <Link to="/articles" className="links">
+      <Link to={`/articles${topic}`} className="links">
         <button type="submit">Go</button>
       </Link>
     </form>

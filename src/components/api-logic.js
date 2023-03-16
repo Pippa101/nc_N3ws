@@ -6,10 +6,12 @@ export const FetchMostPopularArticles = () => {
   );
 };
 
-export const FetchAllArticlesByTopic = (topic) => {
-  return fetch(`https://n3ws.onrender.com/api/articles${topic}`).then(
-    (response) => response.json()
-  );
+export const FetchAllArticlesByTopic = (topicQuery, topic) => {
+  return fetch(
+    topicQuery
+      ? `https://n3ws.onrender.com/api/articles${topic}`
+      : `https://n3ws.onrender.com/api/articles`
+  ).then((response) => response.json());
 };
 
 export const FetchUsers = () => {

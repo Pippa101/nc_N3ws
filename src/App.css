@@ -153,3 +153,7 @@ h1 {
 .vote-button:active {
   background-color: rgb(222, 116, 77);
 }
+
+#topic-h2 {
+  text-transform: capitalize;
+}

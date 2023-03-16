@@ -6,22 +6,22 @@ const ArticlesByTopic = ({ topic }) => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-  const topicQuery = searchParams.get("topic=");
-  console.log(topicQuery);
+  const topicQuery = searchParams.get("topic");
+  console.log(topicQuery, "this is the topic query");
 
   useEffect(() => {
     setIsLoading(true);
-    FetchAllArticlesByTopic(topic).then((body) => {
+    FetchAllArticlesByTopic(topicQuery, topic).then((body) => {
       setArticles(body);
       setIsLoading(false);
     });
-  }, [topic]);
+  }, [topic, topicQuery]);
 
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
     <main>
-      <h2>All Articles</h2>
+      <h2 id="topic-h2">{topicQuery}</h2>
       <section id="ArticlesByTopic-article-section">
         {articles.map((article) => {
           return (
