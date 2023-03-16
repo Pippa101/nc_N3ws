@@ -7,6 +7,7 @@ const Comments = ({ article_id }) => {
   const [articleComments, setArticleComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
   const [inputError, setInputError] = useState(false);
+  const [offlineError, setOfflineError] = useState(false);
   const [posted, setPosted] = useState(false);
 
   useEffect(() => {
@@ -26,12 +27,15 @@ const Comments = ({ article_id }) => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     if (commentInput !== "") {
-      PostComment(article_id, commentInput)
+      PostComment(article_id, commentInput, setOfflineError)
         .then((response) => {
+          console.log(response);
           return response.json();
         })
         .then((response) => {
+          console.log(response);
           setCommentInput("");
+          setOfflineError(false);
           setArticleComments((currArticles) => {
             return [response, ...currArticles];
           });
@@ -39,6 +43,7 @@ const Comments = ({ article_id }) => {
         })
         .catch((error) => {
           console.log(error);
+          setOfflineError(true);
         });
     } else {
       setInputError(true);
@@ -60,6 +65,11 @@ const Comments = ({ article_id }) => {
           <button id="submit-comment-button" type="submit">
             Post
           </button>
+        )}
+        {offlineError ? (
+          <p>Sorry your comment didn't go through try again later</p>
+        ) : (
+          <p></p>
         )}
       </form>
 
