@@ -181,6 +181,10 @@ h1 {
   background-color: rgb(222, 116, 77);
 }
 
+#topic-h2 {
+  text-transform: capitalize;
+}
+
 #error-p {
   margin: 10px;
 }
