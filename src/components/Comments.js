@@ -6,6 +6,7 @@ const Comments = ({ article_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [articleComments, setArticleComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
+  const [reloadComments, setReloadComments] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -13,7 +14,7 @@ const Comments = ({ article_id }) => {
       setArticleComments(body);
       setIsLoading(false);
     });
-  }, [article_id]);
+  }, [article_id, reloadComments]);
 
   const handleCommentInput = (e) => {
     setCommentInput(e.target.value);
@@ -21,13 +22,20 @@ const Comments = ({ article_id }) => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
+
     PostComment(article_id, commentInput)
       .then((response) => {
-        console.log(response);
         return response.json();
       })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then(() => {
+        setReloadComments(true);
+      })
+      .catch((error) =>
+        alert(
+          "sorry your comment didn't go through please try again.",
+          `Error: ${error}`
+        )
+      );
   };
 
   return isLoading ? (
@@ -36,9 +44,11 @@ const Comments = ({ article_id }) => {
     <section className="comment-section">
       <h3>Leave A Comment</h3>
 
-      <form className="comment-article" onSubmit={handleCommentSubmit}>
+      <form id="comment-form" onSubmit={handleCommentSubmit}>
         <input type="text" onChange={handleCommentInput} />
-        <button type="submit">Post</button>
+        <button id="submit-comment-button" type="submit">
+          Post
+        </button>
       </form>
 
       {articleComments.map((comment) => {
