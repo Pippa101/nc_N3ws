@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const TopicSearch = ({ topic, setTopic }) => {
+const TopicSearch = () => {
+  const [topic, setTopic] = useState("");
   const handleTopicChange = (e) => {
     setTopic(`?topic=${e.target.value}`);
   };

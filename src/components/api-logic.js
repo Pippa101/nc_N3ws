@@ -6,10 +6,10 @@ export const FetchMostPopularArticles = () => {
   );
 };
 
-export const FetchAllArticlesByTopic = (topicQuery, topic) => {
+export const FetchAllArticlesByTopic = (topicQuery) => {
   return fetch(
     topicQuery
-      ? `https://n3ws.onrender.com/api/articles${topic}`
+      ? `https://n3ws.onrender.com/api/articles?topic=${topicQuery}`
       : `https://n3ws.onrender.com/api/articles`
   ).then((response) => response.json());
 };
