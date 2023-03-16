@@ -6,7 +6,7 @@ const ArticlesByTopic = ({ topic }) => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
-  const topicQuery = searchParams.get("topic");
+  const topicQuery = searchParams.get("topic=");
   console.log(topicQuery);
 
   useEffect(() => {
