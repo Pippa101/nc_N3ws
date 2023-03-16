@@ -19,6 +19,21 @@ const ArticlesByTopic = () => {
   ) : (
     <main>
       <h2>All Articles</h2>
+
+      <form>
+        <label htmlFor="sorting-select"> Sort By </label>
+        <select id="sorting-select">
+          <option value="date">Date</option>
+          <option value="comment_count">Comment Count</option>
+          <option value="votes">Votes</option>
+        </select>
+
+        <select>
+          <option value="DESC">Descending</option>
+          <option value="ASC">Ascending</option>
+        </select>
+      </form>
+
       <section id="ArticlesByTopic-article-section">
         {articles.map((article) => {
           return (
