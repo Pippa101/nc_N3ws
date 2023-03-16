@@ -6,7 +6,6 @@ const Comments = ({ article_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [articleComments, setArticleComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
-  const [reloadComments, setReloadComments] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -14,7 +13,7 @@ const Comments = ({ article_id }) => {
       setArticleComments(body);
       setIsLoading(false);
     });
-  }, [article_id, reloadComments]);
+  }, [article_id]);
 
   const handleCommentInput = (e) => {
     setCommentInput(e.target.value);
@@ -27,8 +26,10 @@ const Comments = ({ article_id }) => {
       .then((response) => {
         return response.json();
       })
-      .then(() => {
-        setReloadComments(true);
+      .then((response) => {
+        setArticleComments((currArticles) => {
+          return [response, ...currArticles];
+        });
       })
       .catch((error) =>
         alert(
@@ -36,6 +37,7 @@ const Comments = ({ article_id }) => {
           `Error: ${error}`
         )
       );
+    e.target.reset();
   };
 
   return isLoading ? (
