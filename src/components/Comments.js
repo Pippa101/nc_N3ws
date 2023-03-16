@@ -6,6 +6,8 @@ const Comments = ({ article_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [articleComments, setArticleComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
+  const [inputError, setInputError] = useState(false);
+  const [posted, setPosted] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -16,27 +18,31 @@ const Comments = ({ article_id }) => {
   }, [article_id]);
 
   const handleCommentInput = (e) => {
+    setPosted(false);
+    setInputError(false);
     setCommentInput(e.target.value);
   };
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-
-    PostComment(article_id, commentInput)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        setArticleComments((currArticles) => {
-          return [response, ...currArticles];
+    if (commentInput !== "") {
+      PostComment(article_id, commentInput)
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          setCommentInput("");
+          setArticleComments((currArticles) => {
+            return [response, ...currArticles];
+          });
+          setPosted(true);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .catch((error) =>
-        alert(
-          "sorry your comment didn't go through please try again.",
-          `Error: ${error}`
-        )
-      );
+    } else {
+      setInputError(true);
+    }
     e.target.reset();
   };
 
@@ -44,13 +50,17 @@ const Comments = ({ article_id }) => {
     <p>Loading...</p>
   ) : (
     <section className="comment-section">
-      <h3>Leave A Comment</h3>
+      <h3>{posted ? "Comment Posted!" : "Leave A Comment"}</h3>
 
       <form id="comment-form" onSubmit={handleCommentSubmit}>
         <input type="text" onChange={handleCommentInput} />
-        <button id="submit-comment-button" type="submit">
-          Post
-        </button>
+        {inputError ? (
+          <p id="error-p">Please type something in</p>
+        ) : (
+          <button id="submit-comment-button" type="submit">
+            Post
+          </button>
+        )}
       </form>
 
       {articleComments.map((comment) => {

@@ -180,3 +180,7 @@ h1 {
 .vote-button:active {
   background-color: rgb(222, 116, 77);
 }
+
+#error-p {
+  margin: 10px;
+}
