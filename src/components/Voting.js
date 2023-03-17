@@ -44,7 +44,7 @@ const Voting = ({
   return (
     <section id="vote-section">
       {loggedInError ? (
-        <p>Please Log In</p>
+        <p className="error-msg">Please Log In</p>
       ) : (
         <h4>Votes: {singleArticle.votes + vote}</h4>
       )}

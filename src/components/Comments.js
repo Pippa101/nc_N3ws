@@ -34,7 +34,7 @@ const Comments = ({
 
     if (commentInput !== "") {
       if (loggedInUser) {
-        PostComment(article_id, commentInput, setOfflineError)
+        PostComment(article_id, commentInput, loggedInUser)
           .then((response) => {
             console.log(response);
             return response.json();
@@ -66,7 +66,9 @@ const Comments = ({
   ) : (
     <section className="comment-section">
       <h3>{posted ? "Comment Posted!" : "Leave A Comment"}</h3>
-      <h4>{loggedInError ? "You must log in to comment" : ""}</h4>
+      <h4 className="error-msg">
+        {loggedInError ? "You must log in to comment" : ""}
+      </h4>
 
       <form id="comment-form" onSubmit={handleCommentSubmit}>
         <input type="text" onChange={handleCommentInput} />
