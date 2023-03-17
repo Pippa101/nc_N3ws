@@ -4,7 +4,7 @@ import { FetchUsers } from "./api-logic";
 const UserAccounts = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
