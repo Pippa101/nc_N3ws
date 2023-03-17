@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { FetchUsers } from "./api-logic";
 
-const UserAccounts = () => {
+const UserAccounts = ({ setLoggedInUser }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   useEffect(() => {
     setIsLoading(true);
     FetchUsers().then((body) => {
@@ -20,18 +19,26 @@ const UserAccounts = () => {
     <main id="user-account-container">
       {users.map((user) => {
         return (
-          <article className="user-card" key={user.username}>
-            <img
-              className="avatar"
-              src={user.avatar_url}
-              alt={`avatar of ${user.username}`}
-            />
-            <p>{user.name}</p>
-            <p>{user.username}</p>
-            <button onClick={(e) => {}}>Log {isLoggedIn ? "Out" : "In"}</button>
-          </article>
+          <button
+            key={`${user.username}-select-button`}
+            onClick={(e) => {
+              setLoggedInUser(user.username);
+              setIsLoggedIn(!isLoggedIn);
+            }}
+          >
+            <article className="user-card" key={user.username}>
+              <img
+                className="avatar"
+                src={user.avatar_url}
+                alt={`avatar of ${user.username}`}
+              />
+              <p>{user.name}</p>
+              <p>{user.username}</p>
+            </article>
+          </button>
         );
       })}
+      <p>You're Logged {isLoggedIn ? "In!" : " Out"}</p>
     </main>
   );
 };

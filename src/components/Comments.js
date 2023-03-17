@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { FetchArticleComments } from "./api-logic";
 import { PostComment } from "./api-logic";
 
-const Comments = ({ article_id }) => {
+const Comments = ({
+  article_id,
+  loggedInUser,
+  loggedInError,
+  setLoggedInError,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [articleComments, setArticleComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
@@ -26,25 +31,30 @@ const Comments = ({ article_id }) => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
+
     if (commentInput !== "") {
-      PostComment(article_id, commentInput, setOfflineError)
-        .then((response) => {
-          console.log(response);
-          return response.json();
-        })
-        .then((response) => {
-          console.log(response);
-          setCommentInput("");
-          setOfflineError(false);
-          setArticleComments((currArticles) => {
-            return [response, ...currArticles];
+      if (loggedInUser) {
+        PostComment(article_id, commentInput, setOfflineError)
+          .then((response) => {
+            console.log(response);
+            return response.json();
+          })
+          .then((response) => {
+            console.log(response);
+            setCommentInput("");
+            setOfflineError(false);
+            setArticleComments((currArticles) => {
+              return [response, ...currArticles];
+            });
+            setPosted(true);
+          })
+          .catch((error) => {
+            console.log(error);
+            setOfflineError(true);
           });
-          setPosted(true);
-        })
-        .catch((error) => {
-          console.log(error);
-          setOfflineError(true);
-        });
+      } else {
+        setLoggedInError(true);
+      }
     } else {
       setInputError(true);
     }
@@ -56,6 +66,7 @@ const Comments = ({ article_id }) => {
   ) : (
     <section className="comment-section">
       <h3>{posted ? "Comment Posted!" : "Leave A Comment"}</h3>
+      <h4>{loggedInError ? "You must log in to comment" : ""}</h4>
 
       <form id="comment-form" onSubmit={handleCommentSubmit}>
         <input type="text" onChange={handleCommentInput} />
