@@ -54,10 +54,7 @@ const ArticlesByTopic = () => {
       </form>
 
       <h2 id="topic-h2">{topicQuery}</h2>
-      <h3>
-        {sortByQuery ? `Sorted by ${sortByQuery} ` : ""}
-        {orderQuery ? orderQuery : ""}
-      </h3>
+
       <section id="ArticlesByTopic-article-section">
         {articles.map((article) => {
           return (
