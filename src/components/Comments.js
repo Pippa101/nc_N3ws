@@ -40,7 +40,6 @@ const Comments = ({
             return response.json();
           })
           .then((response) => {
-            console.log(response);
             setCommentInput("");
             setOfflineError(false);
             setArticleComments((currArticles) => {

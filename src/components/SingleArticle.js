@@ -37,7 +37,7 @@ const SingleArticle = ({ loggedInUser }) => {
       </section>
       <Voting
         singleArticle={singleArticle}
-        isLoggedIn={loggedInUser}
+        loggedInUser={loggedInUser}
         article_id={article_id}
         loggedInError={loggedInError}
         setLoggedInError={setLoggedInError}

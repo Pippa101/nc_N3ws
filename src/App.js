@@ -9,7 +9,7 @@ import SingleArticle from "./components/SingleArticle";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState("");
-
+  console.log(loggedInUser, "I'm in the app");
   return (
     <div className="App">
       <Header />
