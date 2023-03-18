@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { PatchArticleVotes } from "./api-logic";
 
-const Voting = ({ singleArticle, article_id }) => {
+const Voting = ({
+  singleArticle,
+  article_id,
+  loggedInUser,
+  loggedInError,
+  setLoggedInError,
+}) => {
   const [vote, setVote] = useState(0);
   const [disabledButton, setDisabledButton] = useState(false);
 
@@ -17,17 +23,32 @@ const Voting = ({ singleArticle, article_id }) => {
   }, [article_id, vote]);
 
   const incrementVote = (e) => {
-    setVote(1);
-    setDisabledButton(true);
+    if (loggedInUser) {
+      setVote(1);
+      setDisabledButton(true);
+    } else {
+      setLoggedInError(true);
+      setDisabledButton(true);
+    }
   };
   const decrementVote = (e) => {
-    setVote(-1);
-    setDisabledButton(true);
+    if (loggedInUser) {
+      setVote(-1);
+      setDisabledButton(true);
+    } else {
+      setLoggedInError(true);
+      setDisabledButton(true);
+    }
   };
-
+  console.log(loggedInUser);
   return (
     <section id="vote-section">
-      <h4>Votes: {singleArticle.votes + vote}</h4>
+      {loggedInError ? (
+        <p className="error-msg">Please Log In</p>
+      ) : (
+        <h4>Votes: {singleArticle.votes + vote}</h4>
+      )}
+
       <button
         disabled={disabledButton}
         className="vote-button"

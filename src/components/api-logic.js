@@ -52,13 +52,13 @@ export const PatchArticleVotes = (article_id, vote) => {
   });
 };
 
-export const PostComment = (article_id, commentInput) => {
+export const PostComment = (article_id, commentInput, loggedInUser) => {
   return fetch(
     `https://n3ws.onrender.com/api/articles/${article_id}/comments`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: "tickle122", body: commentInput }),
+      body: JSON.stringify({ username: loggedInUser, body: commentInput }),
     }
   );
 };

@@ -1,13 +1,14 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FetchSingleArticle } from "./api-logic";
 import Comments from "./Comments";
 import Voting from "./Voting";
 
-const SingleArticle = () => {
+const SingleArticle = ({ loggedInUser }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [singleArticle, setSingleArticle] = useState({});
   const { article_id } = useParams();
+  const [loggedInError, setLoggedInError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -28,8 +29,25 @@ const SingleArticle = () => {
       <h2>{singleArticle.title}</h2>
       <h3>Author: {singleArticle.author}</h3>
       <p>{singleArticle.body}</p>
-      <Voting singleArticle={singleArticle} article_id={article_id} />
-      <Comments article_id={article_id} />
+      <section>
+        <p>Sign in to vote or leave a commment</p>
+        <Link to="/users">
+          <button>Log In</button>
+        </Link>
+      </section>
+      <Voting
+        singleArticle={singleArticle}
+        loggedInUser={loggedInUser}
+        article_id={article_id}
+        loggedInError={loggedInError}
+        setLoggedInError={setLoggedInError}
+      />
+      <Comments
+        loggedInError={loggedInError}
+        setLoggedInError={setLoggedInError}
+        loggedInUser={loggedInUser}
+        article_id={article_id}
+      />
     </main>
   );
 };
