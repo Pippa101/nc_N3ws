@@ -5,6 +5,7 @@ const UserAccounts = ({ setLoggedInUser, loggedInUser }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     setIsLoading(true);
     FetchUsers().then((body) => {

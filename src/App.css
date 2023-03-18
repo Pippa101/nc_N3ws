@@ -196,3 +196,7 @@ h1 {
 #user-card-selected {
   background-color: aqua;
 }
+
+#sorting-select {
+  margin: 10px;
+}
