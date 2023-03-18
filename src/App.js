@@ -17,7 +17,12 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/users"
-          element={<UserAccounts setLoggedInUser={setLoggedInUser} />}
+          element={
+            <UserAccounts
+              setLoggedInUser={setLoggedInUser}
+              loggedInUser={loggedInUser}
+            />
+          }
         />
         <Route path="/articles" element={<ArticlesByTopic />} />
         <Route

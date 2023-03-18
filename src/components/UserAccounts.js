@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FetchUsers } from "./api-logic";
 
-const UserAccounts = ({ setLoggedInUser }) => {
+const UserAccounts = ({ setLoggedInUser, loggedInUser }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,6 +17,11 @@ const UserAccounts = ({ setLoggedInUser }) => {
     <p>loading ...</p>
   ) : (
     <main id="user-account-container">
+      <p>
+        {loggedInUser
+          ? `You're logged in as ${loggedInUser}`
+          : "You're not logged in"}
+      </p>
       {users.map((user) => {
         return (
           <button
