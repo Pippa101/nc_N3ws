@@ -5,7 +5,7 @@ import { Link, useSearchParams } from "react-router-dom";
 const ArticlesByTopic = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const topicQuery = searchParams.get("topic");
   const sortByQuery = searchParams.get("sort_by");
   const orderQuery = searchParams.get("order_by");
