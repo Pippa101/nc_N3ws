@@ -36,24 +36,22 @@ const ArticlesByTopic = () => {
     <p>Loading ...</p>
   ) : (
     <main>
-      <h2>All Articles</h2>
+      <h2 id="topic-h2">{topicQuery}</h2>
 
-      <form>
-        <select id="sorting-select" onChange={handleSortChange}>
+      <form id="sort-form">
+        <select className="sorting-selects" onChange={handleSortChange}>
           <option>Sort By</option>
           <option value="created_at">Date</option>
           <option value="comment_count">Comment Count</option>
           <option value="votes">Votes</option>
         </select>
 
-        <select onChange={handleOrderChange}>
+        <select className="sorting-selects" onChange={handleOrderChange}>
           <option>Order</option>
           <option value="DESC">Descending</option>
           <option value="ASC">Ascending</option>
         </select>
       </form>
-
-      <h2 id="topic-h2">{topicQuery}</h2>
 
       <section id="ArticlesByTopic-article-section">
         {articles.map((article) => {

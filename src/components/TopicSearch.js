@@ -8,7 +8,7 @@ const TopicSearch = () => {
   };
 
   return (
-    <form>
+    <form id="topic-search">
       <label htmlFor="topics">Topics</label>
       <select onChange={handleTopicChange}>
         <option value="">All Articles</option>

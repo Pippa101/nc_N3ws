@@ -5,7 +5,7 @@ const Header = () => {
       <span className="headerDecoration">Deco 1</span>
       <Link to="/" className="links">
         <h1>
-          N<span id="orange3">3</span>WS
+          N<span className="orange">3</span>WS
         </h1>
       </Link>
       <span className="headerDecoration"> Deco 1 </span>

@@ -4,7 +4,6 @@ import { FetchUsers } from "./api-logic";
 const UserAccounts = ({ setLoggedInUser, loggedInUser }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -29,7 +28,6 @@ const UserAccounts = ({ setLoggedInUser, loggedInUser }) => {
             key={`${user.username}-select-button`}
             onClick={(e) => {
               setLoggedInUser(user.username);
-              setIsLoggedIn(!isLoggedIn);
             }}
           >
             <article className="user-card" key={user.username}>
@@ -44,7 +42,6 @@ const UserAccounts = ({ setLoggedInUser, loggedInUser }) => {
           </button>
         );
       })}
-      <p>You're Logged {isLoggedIn ? "In!" : " Out"}</p>
     </main>
   );
 };
