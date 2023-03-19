@@ -18,12 +18,12 @@ const HomePage = () => {
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
-    <main>
+    <main id="main-home">
       <h2 id="home-h2">
         Fancy A Read<span className="orange">?</span>
       </h2>
       <TopicSearch />
-      <h3>Most Popular</h3>
+      <h3 id="most-popular">Most Popular</h3>
       <section id="home-article-section">
         {mostPopular.map((popularArticle) => {
           return (
