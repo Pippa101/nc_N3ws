@@ -4,7 +4,6 @@ import { FetchUsers } from "./api-logic";
 const UserAccounts = ({ setLoggedInUser, loggedInUser }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -17,34 +16,34 @@ const UserAccounts = ({ setLoggedInUser, loggedInUser }) => {
   return isLoading ? (
     <p>loading ...</p>
   ) : (
-    <main id="user-account-container">
+    <main>
       <p>
         {loggedInUser
           ? `You're logged in as ${loggedInUser}`
           : "You're not logged in"}
       </p>
-      {users.map((user) => {
-        return (
-          <button
-            key={`${user.username}-select-button`}
-            onClick={(e) => {
-              setLoggedInUser(user.username);
-              setIsLoggedIn(!isLoggedIn);
-            }}
-          >
-            <article className="user-card" key={user.username}>
-              <img
-                className="avatar"
-                src={user.avatar_url}
-                alt={`avatar of ${user.username}`}
-              />
-              <p>{user.name}</p>
-              <p>{user.username}</p>
-            </article>
-          </button>
-        );
-      })}
-      <p>You're Logged {isLoggedIn ? "In!" : " Out"}</p>
+      <section id="user-account-container">
+        {users.map((user) => {
+          return (
+            <button
+              key={`${user.username}-select-button`}
+              onClick={(e) => {
+                setLoggedInUser(user.username);
+              }}
+            >
+              <article className="user-card" key={user.username}>
+                <img
+                  className="avatar"
+                  src={user.avatar_url}
+                  alt={`avatar of ${user.username}`}
+                />
+                <p>{user.name}</p>
+                <p>{user.username}</p>
+              </article>
+            </button>
+          );
+        })}
+      </section>
     </main>
   );
 };

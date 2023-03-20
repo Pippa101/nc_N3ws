@@ -27,9 +27,11 @@ const SingleArticle = ({ loggedInUser }) => {
         alt={`scene of ${singleArticle.topic}`}
       />
       <h2>{singleArticle.title}</h2>
-      <h3>Author: {singleArticle.author}</h3>
-      <p>{singleArticle.body}</p>
-      <section>
+      <h3>
+        <span className="orange">Author:</span> {singleArticle.author}
+      </h3>
+      <p id="article-body">{singleArticle.body}</p>
+      <section id="login-section">
         <p>Sign in to vote or leave a commment</p>
         <Link to="/users">
           <button>Log In</button>

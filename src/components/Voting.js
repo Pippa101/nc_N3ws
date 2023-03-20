@@ -40,7 +40,7 @@ const Voting = ({
       setDisabledButton(true);
     }
   };
-  console.log(loggedInUser);
+
   return (
     <section id="vote-section">
       {loggedInError ? (
